@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\Timestamps;
 use DateTime;
 
 /**
@@ -11,6 +12,7 @@ use DateTime;
  */
 class Event
 {
+    use Timestamps;
 
     /**
      * @ORM\Id
@@ -43,21 +45,21 @@ class Event
     private $date;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @var String
      */
     private $address;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @var String
      */
     private $lat;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @var String
      */
@@ -71,25 +73,23 @@ class Event
     private $maxAttendants;
 
     /**
+     * @ORM\Column(type="smallint")
+     *
+     * @var Int
+     */
+    private $nbAttendants;
+
+    /**
      * @ORM\Column(type="string", length=50)
      *
      * @var String
      */
     private $author;
 
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     *
-     * @var DateTime
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     *
-     * @var DateTime
-     */
-    private $updatedAt;
+    public function __construct()
+    {
+        $this->nbAttendants = 0;
+    }
 
     /**
      * Get the value of id
@@ -295,51 +295,25 @@ class Event
     }
 
     /**
-     * Get the value of createdAt
+     * Get the value of nbAttendants
      *
-     * @return  DateTime
+     * @return  Int
      */
-    public function getCreatedAt()
+    public function getNbAttendants()
     {
-        return $this->createdAt;
+        return $this->nbAttendants;
     }
 
     /**
-     * Set the value of createdAt
-     * 
-     * @ORM\PrePersist()
-     * @param  DateTime  $createdAt
+     * Set the value of nbAttendants
+     *
+     * @param  Int  $nbAttendants
      *
      * @return  self
      */
-    public function setCreatedAt(DateTime $createdAt)
+    public function setNbAttendants(Int $nbAttendants)
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of updatedAt
-     *
-     * @return  DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set the value of updatedAt
-     *
-     * @ORM\PreUpdate()
-     * @param  DateTime  $updatedAt
-     *
-     * @return  self
-     */
-    public function setUpdatedAt(DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
+        $this->nbAttendants = $nbAttendants;
 
         return $this;
     }
