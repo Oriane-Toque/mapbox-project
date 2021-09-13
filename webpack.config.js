@@ -58,6 +58,9 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
 
+    // autoprefixer
+    .enablePostCssLoader()
+
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
