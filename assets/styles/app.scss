@@ -1,3 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Lobster&display=swap');
+
+@mixin burger-style($translate) {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    background-color: $main-color;
+    transform: translateY($translate);
+    transition: all .5s ease-in-out;
+}
+
+@mixin burger-active-style($translate, $rotate) {
+    transform: translateY($translate) translateX(-145px) rotateZ($rotate);
+}
+
+// FONT-FAMILY
+$title-family: 'Lobster', sans-serif; // font stylisée
+$main-family: 'Kanit', sans-serif; // font normale
+
+// FONT-WEIGHT
+$font-light: 300;
+$font-medium: 400;
+$font-bold: 600;
+
+// FONT-SIZE
+$normal-size: .8rem;
+$medium-size: 1rem;
+$large-size: 1.25rem;
+// logo size
+$xl-size: 2.5rem;
+
+// COLORS
+$bg-color: #eaeaea; // beige
+$main-color: #00cec9; // bleu
+$font-color: #2d3436; // gris noir
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
 body {
-    background: linear-gradient(to bottom, #63c1be 0%,#59b8b5 100%);
+    font: {
+        family: $main-family;
+        size: $normal-size;
+        weight: $font-medium;
+    }
+    color: $font-color;
+}
+
+header[role="banner"] {
+    padding: 2rem 1rem;
+    font: {
+        family: $title-family;
+        size: $large-size;
+        weight: $font-bold;
+    }
+    background-color: $bg-color;
+
+    // navigation
+    .main__nav {
+
+        // logo
+        .main__nav-logo {
+            flex: 1;
+        }
+
+        // bouton burger
+        .main__nav-burger {
+            position: absolute;
+            top: calc((104px - 40px)/2);
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+
+            // icon burger
+            span {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                display: block;
+                width: 100%;
+                height: 6px;
+                background-color: $main-color;
+                transition: all .5s ease-in-out;
+
+                &:after {
+                   @include burger-style(11px) 
+                }
+
+                &:before {
+                    @include burger-style(-11px)
+                }
+            }
+
+            &.active {
+
+                span {
+                    background-color: transparent;
+                    transform: translateX(145px);
+
+                    &:after {
+                        @include burger-active-style(0, -45deg)
+                    }
+    
+                    &:before {
+                        @include burger-active-style(0, 45deg)
+                    }
+                }
+            }
+        }
+    }
 }
