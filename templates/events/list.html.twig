@@ -1,0 +1,29 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block title "Home" %}
+
+{% block body %}
+
+    <section class="list">
+    {% for event in events %}
+        <div class="list__event">
+            <header class="list__event-header">
+                <h2>{{ event.title }}</h2>
+                {% if event.updatedAt is same as(null) %}
+                    <time datetime="{{ event.createdAt|date("d-m-Y") }}">Paru le : {{ event.createdAt|date("d-m-Y") }}</time> 
+                {% else %}
+                    <time datetime="{{ event.updatedAt|date("d-m-Y") }}">Modifié le : {{ event.updatedAt|date("d-m-Y") }}</time> 
+                {% endif %}
+                
+            </header>
+            <p>{{ event.author }}</p>
+            <p>{{ event.date|format_datetime(locale='fr') }}</p>
+            <p>{{ event.address }}</p>
+            <footer class="list__event-footer">
+                <p>Places restantes: {{ event.maxAttendants - event.nbAttendants}}</p>
+            </footer>
+        </div>
+    {% endfor %}
+    </section>
+
+{% endblock %}

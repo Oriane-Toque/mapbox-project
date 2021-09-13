@@ -24,7 +24,7 @@ class AppFixtures extends Fixture
             $event->setLat($faker->latitude());
             $event->setLon($faker->longitude());
             $event->setMaxAttendants(rand(1, 20));
-            $event->setnbAttendants(rand(1, 20));
+            $event->setnbAttendants(1);
             $event->setAuthor($faker->name());
 
 

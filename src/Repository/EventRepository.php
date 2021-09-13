@@ -12,4 +12,17 @@ class EventRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Event::class);
     }
+
+    /**
+     * Return events list
+     * 
+     * @return Array
+     */
+    public function getEvents(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
